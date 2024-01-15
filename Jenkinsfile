@@ -45,21 +45,6 @@ pipeline
             }
         }
 
-       stage('Upload DMAPP')
-       {
-            steps
-            {
-              withCredentials([string(credentialsId: 'DeployExampleToken', variable: 'DATAMINER_CATALOG_TOKEN')])
-              {
-                script
-                {
-                    uploadOutput = bat(returnStdout: true, script: "@dotnet dataminer-catalog-upload --path-to-artifact \"${WORKSPACE}\\HelloFromJenkins.dmapp\"")
-                    uploadOutput = uploadOutput.trim()
-                }
-              }
-            }
-       } 
-
        stage("Deploy DMAPP")
        {
             steps
